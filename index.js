@@ -9,7 +9,7 @@ const bot = new TelegramApi(process.env.BOT_TOKEN, { polling: true });
 
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
-  const job = schedule.scheduleJob('*/10 * * * * *', function () {
+  const job = schedule.scheduleJob('30 10 * * *', function () {
     const keys = Object.keys(members.members);
     const member = keys[Math.floor(Math.random() * keys.length)];
     members.members[member] = members.members[member] + 1;
