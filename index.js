@@ -7,8 +7,14 @@ require('dotenv').config();
 
 const bot = new TelegramApi(process.env.BOT_TOKEN, { polling: true });
 
-bot.on('message', async (msg) => {
+// bot.onText(/\/startbot/, (msg) => {
+//   const chatId = msg.chat.id;
+//   console.log(chatId);
+//   bot.sendMessage(-1001102321019, 'hello');
+// });
+bot.onText(/\/startbot/, async (msg) => {
   const chatId = msg.chat.id;
+  console.log('Bot started in:' + chatId + ' at ' + new Date());
   const job = schedule.scheduleJob('0 10 13 * * 0-6', function () {
     const keys = Object.keys(members.members);
     const member = keys[Math.floor(Math.random() * keys.length)];
@@ -29,16 +35,19 @@ bot.on('message', async (msg) => {
     );
 
     setTimeout(() => {
-      bot.sendMessage(chatId, phrase[0]);
+      bot.sendMessage(-1001102321019, phrase[0]);
     }, 1);
     setTimeout(() => {
-      bot.sendMessage(chatId, phrase[1]);
+      bot.sendMessage(-1001102321019, phrase[1]);
     }, 2500);
     setTimeout(() => {
-      bot.sendMessage(chatId, `${pidorPhrase} ${member}`);
+      bot.sendMessage(-1001102321019, `${pidorPhrase} ${member}`);
     }, 4500);
     setTimeout(() => {
-      bot.sendMessage(chatId, `Топ пидоров:\n\n${scoreList.join('\n')}`);
+      bot.sendMessage(
+        -1001102321019,
+        `Топ пидоров:\n\n${scoreList.join('\n')}`,
+      );
     }, 6000);
   });
 });
