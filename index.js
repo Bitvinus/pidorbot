@@ -15,7 +15,7 @@ const bot = new TelegramApi(process.env.BOT_TOKEN, { polling: true });
 bot.onText(/\/startbot/, async (msg) => {
   const chatId = msg.chat.id;
   console.log('Bot started in:' + chatId + ' at ' + new Date());
-  const job = schedule.scheduleJob('0 05 55 * * 0-6', function () {
+  const job = schedule.scheduleJob('0 0 06 * * 0-6', function () {
     const keys = Object.keys(members.members);
     const member = keys[Math.floor(Math.random() * keys.length)];
     members.members[member] = members.members[member] + 1;
