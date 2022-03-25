@@ -7,11 +7,6 @@ require('dotenv').config();
 
 const bot = new TelegramApi(process.env.BOT_TOKEN, { polling: true });
 
-// bot.onText(/\/startbot/, (msg) => {
-//   const chatId = msg.chat.id;
-//   console.log(chatId);
-//   bot.sendMessage(-1001102321019, 'hello');
-// });
 bot.onText(/\/startbot/, async (msg) => {
   const chatId = msg.chat.id;
   console.log('Bot started in:' + chatId + ' at ' + new Date());
@@ -35,19 +30,16 @@ bot.onText(/\/startbot/, async (msg) => {
     );
 
     setTimeout(() => {
-      bot.sendMessage(-1001102321019, phrase[0]);
+      bot.sendMessage(chatId, phrase[0]);
     }, 1);
     setTimeout(() => {
-      bot.sendMessage(-1001102321019, phrase[1]);
+      bot.sendMessage(chatId, phrase[1]);
     }, 2500);
     setTimeout(() => {
-      bot.sendMessage(-1001102321019, `${pidorPhrase} ${member}`);
+      bot.sendMessage(chatId, `${pidorPhrase} ${member}`);
     }, 4500);
     setTimeout(() => {
-      bot.sendMessage(
-        -1001102321019,
-        `Топ пидоров:\n\n${scoreList.join('\n')}`,
-      );
+      bot.sendMessage(chatId, `Топ пидоров:\n\n${scoreList.join('\n')}`);
     }, 6000);
   });
 });
